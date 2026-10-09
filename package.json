@@ -1,0 +1,13 @@
+{
+  "name": "nocaute-ct",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site do Centro de Treinamento Nocaute",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
