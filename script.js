@@ -117,7 +117,7 @@ if (
 
 if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const revealItems = document.querySelectorAll(
-    ".value-card, .class-card, .home-page-card, .schedule-heading, .weekly-schedule, .pricing-heading, .pricing-table-wrap, .contact-page-copy, .contact-page-form",
+    ".value-card, .facility-card, .coach-profile, .class-card, .home-page-card, .schedule-heading, .weekly-schedule, .pricing-heading, .pricing-table-wrap, .contact-page-copy, .contact-page-form",
   );
 
   if (revealItems.length > 0) {

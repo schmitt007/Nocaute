@@ -483,6 +483,111 @@ button:focus-visible {
   line-height: 1.75;
 }
 
+.ct-facilities {
+  margin-top: 86px;
+}
+
+.ct-facilities .section-heading {
+  margin-bottom: 28px;
+}
+
+.ct-facilities .section-heading h2 {
+  margin-top: 22px;
+  font-size: clamp(53px, 6vw, 76px);
+}
+
+.facility-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.facility-card {
+  min-height: 210px;
+  padding: 21px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--page);
+}
+
+.facility-number {
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.facility-card h3 {
+  margin: 35px 0 11px;
+  font-family: var(--display);
+  font-size: clamp(27px, 3.4vw, 43px);
+  font-weight: 800;
+  line-height: 0.92;
+}
+
+.facility-card p {
+  max-width: 250px;
+  margin: 0;
+  color: var(--muted-strong);
+  font-size: 11px;
+  line-height: 1.75;
+}
+
+.coach-profile {
+  display: grid;
+  grid-template-columns: minmax(145px, 0.6fr) minmax(0, 1.4fr);
+  align-items: center;
+  gap: 7%;
+  margin-top: 70px;
+  padding: clamp(27px, 5vw, 58px);
+  background: #171717;
+  color: #fff;
+}
+
+.coach-profile-mark {
+  display: grid;
+  width: min(100%, 220px);
+  aspect-ratio: 1;
+  place-items: center;
+  justify-self: center;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--display);
+  font-size: clamp(68px, 10vw, 112px);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.coach-profile-copy .section-kicker {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.coach-profile-copy .section-kicker span {
+  color: #fff;
+}
+
+.coach-profile-copy h2 {
+  margin: 22px 0 15px;
+  font-family: var(--display);
+  font-size: clamp(60px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 0.82;
+}
+
+.coach-profile-copy h2 span {
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.coach-profile-copy > p {
+  max-width: 550px;
+  margin: 0 0 24px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
 .women-training-note {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -1818,6 +1923,40 @@ button:focus-visible {
     grid-template-columns: 1fr;
     gap: 12px;
     padding: 19px;
+  }
+
+  .ct-facilities {
+    margin-top: 60px;
+  }
+
+  .facility-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .facility-card {
+    min-height: 175px;
+  }
+
+  .facility-card h3 {
+    margin-top: 26px;
+    font-size: 38px;
+  }
+
+  .coach-profile {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 50px;
+    padding: 25px;
+  }
+
+  .coach-profile-mark {
+    width: 125px;
+    justify-self: start;
+    font-size: 67px;
+  }
+
+  .coach-profile-copy h2 {
+    font-size: clamp(61px, 16vw, 82px);
   }
 
   .subpage-cta {
