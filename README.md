@@ -25,3 +25,16 @@ O servidor escuta na porta definida pela hospedagem (ou na 3000 local), então p
 Para manter os contatos entre reinicializações e novas versões, configure armazenamento persistente para a pasta `data`. Algumas hospedagens apagam arquivos locais quando a aplicação reinicia. Antes de divulgar o formulário publicamente, configure HTTPS, armazenamento persistente e proteção antispam apropriada.
 
 Um domínio público precisa ser registrado e apontado para uma hospedagem. O código permite executar o site localmente, mas criar um domínio público exige uma conta de hospedagem e acesso a um domínio registrado.
+
+## Criar um link público gratuito
+
+O arquivo `render.yaml` prepara o site para publicação como um serviço gratuito no Render:
+
+1. Envie as alterações do projeto para o repositório no GitHub.
+2. Crie uma conta em [render.com](https://render.com) e conecte o GitHub.
+3. No painel do Render, escolha **New** → **Blueprint**, selecione o repositório `schmitt007/Nocaute` e confirme a criação do serviço `nocaute-ct`.
+4. Quando a publicação terminar, abra o endereço `https://nocaute-ct.onrender.com` mostrado no painel e compartilhe esse link.
+
+O Render pode levar alguns instantes para iniciar o serviço depois de um período sem acessos. O endereço gratuito serve para apresentar o projeto; não é preciso comprar um domínio para compartilhar o site.
+
+O armazenamento local do plano gratuito não é persistente. Por isso, os contatos enviados pelo formulário podem ser perdidos quando o serviço reiniciar. Use esse link apenas como prévia do projeto e não como canal de matrícula/recebimento de contatos até configurar armazenamento persistente e avisos de privacidade. Para ativar o botão do WhatsApp, configure `WHATSAPP_NUMBER` nas variáveis de ambiente do serviço no Render.

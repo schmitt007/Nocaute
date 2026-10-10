@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: nocaute-ct
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health

@@ -69,11 +69,54 @@ a {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
+  flex: 0 0 auto;
+  color: #fff;
+}
+
+.brand-emblem {
+  display: block;
+  width: 54px;
+  height: 54px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  background: #171717;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.brand:hover .brand-emblem {
+  transform: scale(1.05);
+  box-shadow: 0 3px 16px rgba(0, 0, 0, 0.38);
+}
+
+.brand-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brand-copy {
+  display: grid;
+  gap: 3px;
+}
+
+.brand-name {
   font-family: var(--display);
-  font-size: 25px;
+  font-size: 21px;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.045em;
+  line-height: 0.95;
+}
+
+.brand-caption {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1;
 }
 
 .brand-mark {
@@ -440,6 +483,43 @@ button:focus-visible {
   line-height: 1.75;
 }
 
+.women-training-note {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 25px;
+  margin-top: 33px;
+  padding: 22px 24px;
+  border-left: 3px solid #c74785;
+  background: var(--paper);
+}
+
+.women-training-label {
+  color: #a9326c;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.women-training-note h3 {
+  margin: 0 0 6px;
+  font-family: var(--display);
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.women-training-note p {
+  max-width: 530px;
+  margin: 0;
+  color: var(--muted-strong);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.women-training-note .underlined-link {
+  white-space: nowrap;
+}
+
 .classes {
   padding-top: 96px;
   padding-bottom: 105px;
@@ -741,12 +821,12 @@ button:focus-visible {
   padding-bottom: 113px;
 }
 
-.schedule-layout {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  align-items: center;
-  gap: 10%;
-  margin-top: 34px;
+.schedule-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+  margin: 34px 0 36px;
 }
 
 .schedule-title h2 {
@@ -759,7 +839,7 @@ button:focus-visible {
 
 .schedule-title > p {
   max-width: 310px;
-  margin: 20px 0 24px;
+  margin: 20px 0 0;
 }
 
 .button-dark {
@@ -771,45 +851,174 @@ button:focus-visible {
   background: #383838;
 }
 
-.schedule-table {
-  border-top: 1px solid var(--line);
+.schedule-class-label {
+  margin: 0 0 12px;
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
 }
 
-.schedule-row {
-  display: grid;
-  min-height: 66px;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr) minmax(0, 1.2fr);
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid var(--line);
-  font-size: 11px;
-}
-
-.schedule-row > * {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-.schedule-header {
-  min-height: 44px;
+.schedule-class-label span {
   color: var(--muted);
-  font-size: 8px;
+}
+
+.weekly-schedule {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.day-card {
+  min-width: 0;
+  padding: 15px 10px 10px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.day-card h3 {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-family: var(--display);
+  font-size: 17px;
   font-weight: 700;
-  letter-spacing: 0.13em;
 }
 
-.schedule-row strong {
+.day-card ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.day-card li {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 3px;
+  background: var(--paper);
   font-size: 12px;
+  font-weight: 600;
+  text-align: center;
 }
 
-.schedule-row > span:last-child {
+.day-card li.personal-fight {
   color: var(--muted-strong);
   font-size: 10px;
+  font-weight: 500;
+}
+
+.day-card li.women-class {
+  flex-direction: column;
+  gap: 1px;
+  background: #f8dff0;
+  color: #3c1630;
+  line-height: 1.2;
+}
+
+.day-card li.women-class span {
+  font-size: 9px;
+  font-weight: 700;
 }
 
 .schedule-note {
-  margin: 14px 0 0;
+  max-width: 720px;
+  margin: 15px 0 0;
   color: var(--muted);
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.pricing {
+  padding-top: 94px;
+  padding-bottom: 104px;
+  background: var(--paper);
+}
+
+.pricing-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+  margin: 28px 0 30px;
+}
+
+.pricing-heading h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(56px, 7vw, 82px);
+  font-weight: 800;
+  line-height: 0.86;
+}
+
+.pricing-heading h2 span {
+  color: var(--muted);
+}
+
+.pricing-heading p {
+  margin: 0 0 4px;
+  color: var(--muted-strong);
+  font-size: 12px;
+}
+
+.pricing-table-wrap {
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.pricing-table-wrap:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.pricing-table {
+  width: 100%;
+  min-width: 690px;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: 16px 12px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.pricing-table thead th {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.pricing-table tbody th {
+  width: 26%;
+  font-size: 12px;
+  text-align: left;
+}
+
+.pricing-table tbody th span {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted-strong);
+  font-size: 9px;
+  font-weight: 500;
+}
+
+.pricing-table td {
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pricing-note {
+  max-width: 760px;
+  margin: 16px 0 22px;
+  color: var(--muted-strong);
   font-size: 10px;
   line-height: 1.7;
 }
@@ -1174,6 +1383,38 @@ button:focus-visible {
   font-weight: 400;
 }
 
+.contact-form.contact-page-form label {
+  color: var(--ink);
+}
+
+.contact-form.contact-page-form input,
+.contact-form.contact-page-form select,
+.contact-form.contact-page-form textarea {
+  border-color: var(--field-border);
+  background: transparent;
+  color: var(--ink);
+}
+
+.contact-form.contact-page-form select option {
+  background: var(--page);
+  color: var(--ink);
+}
+
+.contact-form.contact-page-form input:focus,
+.contact-form.contact-page-form select:focus,
+.contact-form.contact-page-form textarea:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ink) 15%, transparent);
+}
+
+.contact-form.contact-page-form .optional-label {
+  color: var(--muted);
+}
+
+.contact-form.contact-page-form .form-status {
+  color: var(--ink);
+}
+
 .form-status {
   min-height: 18px;
   margin: 0;
@@ -1209,13 +1450,20 @@ button:focus-visible {
 }
 
 .footer-brand {
-  font-size: 21px;
+  gap: 9px;
 }
 
-.footer-brand .brand-mark {
-  width: 28px;
-  height: 28px;
+.footer-brand .brand-emblem {
+  width: 44px;
+  height: 44px;
+}
+
+.footer-brand .brand-name {
   font-size: 18px;
+}
+
+.footer-brand .brand-caption {
+  font-size: 7px;
 }
 
 .site-footer > p,
@@ -1277,10 +1525,6 @@ button:focus-visible {
 
   .class-card {
     min-height: 320px;
-  }
-
-  .schedule-layout {
-    gap: 6%;
   }
 
   .contact-content {
@@ -1367,14 +1611,21 @@ button:focus-visible {
     padding: 0 6%;
   }
 
-  .brand {
-    font-size: 22px;
+  .brand-emblem {
+    width: 46px;
+    height: 46px;
   }
 
-  .brand-mark {
-    width: 29px;
-    height: 29px;
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-name {
     font-size: 19px;
+  }
+
+  .brand-caption {
+    font-size: 7px;
   }
 
   .menu-toggle {
@@ -1519,6 +1770,12 @@ button:focus-visible {
     min-height: 150px;
   }
 
+  .women-training-note {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 19px;
+  }
+
   .subpage-cta {
     min-height: 190px;
     flex-wrap: wrap;
@@ -1637,9 +1894,11 @@ button:focus-visible {
     font-size: clamp(39px, 10vw, 55px);
   }
 
-  .schedule-layout {
-    grid-template-columns: 1fr;
-    gap: 43px;
+  .schedule-heading,
+  .pricing-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
     margin-top: 29px;
   }
 
@@ -1647,19 +1906,26 @@ button:focus-visible {
     font-size: clamp(61px, 15vw, 82px);
   }
 
-  .schedule-row {
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 0.9fr) minmax(0, 1.15fr);
-    min-height: 60px;
-    gap: 5px;
-    font-size: 10px;
+  .weekly-schedule {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .schedule-row > span:last-child {
-    font-size: 9px;
+  .day-card {
+    padding: 14px 10px 10px;
   }
 
-  .schedule-header {
-    font-size: 7px;
+  .pricing {
+    padding-top: 72px;
+    padding-bottom: 78px;
+  }
+
+  .pricing-heading h2 {
+    font-size: clamp(61px, 15vw, 82px);
+  }
+
+  .pricing-table th,
+  .pricing-table td {
+    padding: 14px 10px;
   }
 
   .contact {
