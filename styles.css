@@ -1441,7 +1441,7 @@ button:focus-visible {
 .site-footer {
   display: grid;
   min-height: 100px;
-  grid-template-columns: 1fr 1fr 1fr auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto auto auto;
   align-items: center;
   gap: 20px;
   padding: 20px 7.1%;
@@ -1468,6 +1468,7 @@ button:focus-visible {
 
 .site-footer > p,
 .back-top,
+.instagram-link,
 .copyright {
   color: rgba(255, 255, 255, 0.62);
   font-size: 8px;
@@ -1477,6 +1478,15 @@ button:focus-visible {
 
 .back-top {
   justify-self: end;
+}
+
+.instagram-link {
+  justify-self: end;
+  transition: color 180ms ease;
+}
+
+.instagram-link:hover {
+  color: #fff;
 }
 
 .copyright {
@@ -1963,6 +1973,12 @@ button:focus-visible {
   .back-top {
     grid-column: 2;
     grid-row: 1;
+  }
+
+  .instagram-link {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    justify-self: start;
   }
 
   .copyright {

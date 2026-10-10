@@ -6,3 +6,6 @@ services:
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health
+    envVars:
+      - key: WHATSAPP_NUMBER
+        value: "5515997271998"

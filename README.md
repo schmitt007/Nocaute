@@ -16,7 +16,7 @@ Se preferir usar o terminal, abra-o nesta pasta e execute `node server.js`. Não
 
 O formulário valida os dados e grava cada contato como uma linha JSON em `data/leads.jsonl`. Esse arquivo contém dados pessoais: não o publique nem o envie para controle de versão. O servidor aplica limites de tamanho, validação e limitação básica de tentativas.
 
-Para ativar o link do WhatsApp, copie `.env.example` para `.env` e preencha `WHATSAPP_NUMBER` com código do país, DDD e número, somente dígitos. Exemplo: `5511999999999`. Reinicie o servidor após alterar a configuração.
+O link do WhatsApp do CT está configurado com o número comercial `+55 15 99727-1998`. Para usar a mesma configuração localmente, copie `.env.example` para `.env` e reinicie o servidor. No Render, o número é definido pelo `render.yaml` quando o Blueprint é sincronizado.
 
 ## Publicar na internet
 
@@ -37,4 +37,4 @@ O arquivo `render.yaml` prepara o site para publicação como um serviço gratui
 
 O Render pode levar alguns instantes para iniciar o serviço depois de um período sem acessos. O endereço gratuito serve para apresentar o projeto; não é preciso comprar um domínio para compartilhar o site.
 
-O armazenamento local do plano gratuito não é persistente. Por isso, os contatos enviados pelo formulário podem ser perdidos quando o serviço reiniciar. Use esse link apenas como prévia do projeto e não como canal de matrícula/recebimento de contatos até configurar armazenamento persistente e avisos de privacidade. Para ativar o botão do WhatsApp, configure `WHATSAPP_NUMBER` nas variáveis de ambiente do serviço no Render.
+O armazenamento local do plano gratuito não é persistente. Por isso, os contatos enviados pelo formulário podem ser perdidos quando o serviço reiniciar. Use esse link apenas como prévia do projeto e não como canal de matrícula/recebimento de contatos até configurar armazenamento persistente e avisos de privacidade.
