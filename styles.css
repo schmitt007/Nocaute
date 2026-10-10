@@ -545,19 +545,14 @@ button:focus-visible {
   color: #fff;
 }
 
-.coach-profile-mark {
-  display: grid;
+.coach-photo {
+  display: block;
   width: min(100%, 220px);
   aspect-ratio: 1;
-  place-items: center;
   justify-self: center;
+  object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 50%;
-  color: rgba(255, 255, 255, 0.9);
-  font-family: var(--display);
-  font-size: clamp(68px, 10vw, 112px);
-  font-weight: 800;
-  letter-spacing: -0.06em;
 }
 
 .coach-profile-copy .section-kicker {
@@ -1949,10 +1944,9 @@ button:focus-visible {
     padding: 25px;
   }
 
-  .coach-profile-mark {
+  .coach-photo {
     width: 125px;
     justify-self: start;
-    font-size: 67px;
   }
 
   .coach-profile-copy h2 {
