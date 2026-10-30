@@ -14,7 +14,7 @@ Se preferir usar o terminal, abra-o nesta pasta e execute `node server.js`. Não
 
 ## Formulário e contatos
 
-O formulário valida os dados e grava cada contato como uma linha JSON em `data/leads.jsonl`. Esse arquivo contém dados pessoais: não o publique nem o envie para controle de versão. O servidor aplica limites de tamanho, validação e limitação básica de tentativas.
+O formulário valida os dados e grava cada contato em um banco SQLite em `data/leads.db`. Esse arquivo contém dados pessoais: não o publique nem o envie para controle de versão. O servidor aplica limites de tamanho, validação e limitação básica de tentativas.
 
 O link do WhatsApp do CT está configurado com o número comercial `+55 15 99727-1998`. Para usar a mesma configuração localmente, copie `.env.example` para `.env` e reinicie o servidor. No Render, o número é definido pelo `render.yaml` quando o Blueprint é sincronizado.
 

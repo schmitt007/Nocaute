@@ -1,16 +1,28 @@
 const http = require("node:http");
 const fs = require("node:fs");
 const path = require("node:path");
+const { DatabaseSync } = require("node:sqlite");
 
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, "data");
-const LEADS_FILE = path.join(DATA_DIR, "leads.jsonl");
+const LEADS_DB = path.join(DATA_DIR, "leads.db");
 const MAX_BODY_BYTES = 16 * 1024;
 const MAX_REQUESTS_PER_MINUTE = 8;
 const requestCounts = new Map();
+const PUBLIC_STATIC_PATHS = new Set([
+  "/index.html",
+  "/contato.html",
+  "/ct.html",
+  "/modalidades.html",
+  "/horarios.html",
+  "/styles.css",
+  "/script.js",
+  "/theme.js",
+]);
 
 loadLocalEnv();
 const PORT = Number(process.env.PORT || 3000);
+const leadsDb = createDatabase();
 
 const MIME_TYPES = {
   ".css": "text/css; charset=utf-8",
@@ -56,11 +68,10 @@ const server = http.createServer(async (request, response) => {
     try {
       const body = await readJsonBody(request);
       const lead = validateLead(body);
-      await fs.promises.mkdir(DATA_DIR, { recursive: true });
-      await fs.promises.appendFile(LEADS_FILE, `${JSON.stringify(lead)}\n`, {
-        encoding: "utf8",
-        flag: "a",
-      });
+      const insertLead = leadsDb.prepare(
+        "INSERT INTO leads (name, phone, class_name, message, created_at) VALUES (?, ?, ?, ?, ?)",
+      );
+      insertLead.run(lead.name, lead.phone, lead.className, lead.message, lead.createdAt);
       return sendJson(response, 201, { message: "Contato recebido com sucesso." });
     } catch (error) {
       if (error instanceof RequestError) {
@@ -76,13 +87,14 @@ const server = http.createServer(async (request, response) => {
     return sendJson(response, 405, { error: "Método não permitido." });
   }
 
-  const requestedPath = url.pathname === "/" ? "/index.html" : decodeURIComponent(url.pathname);
-  const filePath = path.resolve(ROOT, `.${requestedPath}`);
-  if (!filePath.startsWith(`${ROOT}${path.sep}`)) {
-    return sendJson(response, 403, { error: "Acesso negado." });
-  }
-
   try {
+    const requestedPath = resolvePublicPath(url.pathname);
+    const filePath = path.resolve(ROOT, `.${requestedPath}`);
+
+    if (!filePath.startsWith(`${ROOT}${path.sep}`) && filePath !== ROOT) {
+      return sendJson(response, 403, { error: "Acesso negado." });
+    }
+
     const content = await fs.promises.readFile(filePath);
     response.writeHead(200, {
       "Content-Type": MIME_TYPES[path.extname(filePath)] || "application/octet-stream",
@@ -93,6 +105,9 @@ const server = http.createServer(async (request, response) => {
     });
     return response.end(request.method === "HEAD" ? undefined : content);
   } catch (error) {
+    if (error instanceof RequestError) {
+      return sendJson(response, error.status, { error: error.message });
+    }
     if (error.code === "ENOENT" || error.code === "EISDIR") {
       return sendJson(response, 404, { error: "Página não encontrada." });
     }
@@ -104,6 +119,43 @@ const server = http.createServer(async (request, response) => {
 server.listen(PORT, "0.0.0.0", () => {
   console.log(`Nocaute CT disponível em http://localhost:${PORT}`);
 });
+
+function createDatabase() {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+  const database = new DatabaseSync(LEADS_DB);
+  database.exec(`
+    CREATE TABLE IF NOT EXISTS leads (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      phone TEXT NOT NULL,
+      class_name TEXT NOT NULL,
+      message TEXT NOT NULL DEFAULT '',
+      created_at TEXT NOT NULL
+    );
+  `);
+  return database;
+}
+
+function resolvePublicPath(requestPath) {
+  let decodedPath;
+  try {
+    decodedPath = decodeURIComponent(requestPath);
+  } catch {
+    throw new RequestError(400, "URL inválida.");
+  }
+
+  const normalizedPath = decodedPath === "/" ? "/index.html" : decodedPath;
+  if (
+    normalizedPath.includes("..") ||
+    normalizedPath.includes("\\") ||
+    normalizedPath.startsWith("/.") ||
+    (normalizedPath.startsWith("/assets/") === false && !PUBLIC_STATIC_PATHS.has(normalizedPath))
+  ) {
+    throw new RequestError(403, "Acesso negado.");
+  }
+
+  return normalizedPath;
+}
 
 function loadLocalEnv() {
   const envPath = path.join(ROOT, ".env");
